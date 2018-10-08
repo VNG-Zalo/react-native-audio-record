@@ -79,7 +79,13 @@ public class RNAudioRecordModule extends ReactContextBaseJavaModule {
 
         bufferSize = AudioRecord.getMinBufferSize(sampleRateInHz, channelConfig, audioFormat);
         int recordingBufferSize = bufferSize * 3;
-        recorder = new AudioRecord(AudioSource.VOICE_RECOGNITION, sampleRateInHz, channelConfig, audioFormat, recordingBufferSize);
+		
+		int audioSource = AudioUtils.getInt(reactContext, "id");
+        if (audioSource < 0){
+			audioSource = AudioSource.VOICE_RECOGNITION;
+		}
+		Log.i("debuglog", "record with audio source: " + audioSource);
+        recorder = new AudioRecord(audioSource, sampleRateInHz, channelConfig, audioFormat, recordingBufferSize);
     }
 
     @ReactMethod

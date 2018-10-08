@@ -12,6 +12,7 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.rnzalocalltest.react.Utils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -80,7 +81,7 @@ public class RNAudioRecordModule extends ReactContextBaseJavaModule {
         bufferSize = AudioRecord.getMinBufferSize(sampleRateInHz, channelConfig, audioFormat);
         int recordingBufferSize = bufferSize * 3;
 		
-		int audioSource = AudioUtils.getInt(reactContext, "id");
+		int audioSource = Utils.getInt(reactContext, "id");
         if (audioSource < 0){
 			audioSource = AudioSource.VOICE_RECOGNITION;
 		}
